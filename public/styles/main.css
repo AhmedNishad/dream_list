@@ -1,0 +1,62 @@
+body{
+    background: #EEE;
+    width: 80%;
+    margin: auto;
+}
+
+.nav ul{
+    list-style: none;
+}
+
+.nav li{
+    display: inline-block;
+    padding: 1.1em;
+    background: rgb(236, 191, 191);
+}
+
+.nav a{
+    color: black;
+    text-decoration: none;
+}
+
+form{
+    padding: 1em;
+    max-width: 25vw;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+form label{
+    flex-basis: 35%;
+}
+
+form input{
+    flex-basis: 60%;
+    margin: 0.3em;
+}
+form button{
+    position: relative;
+    margin: 1.1em auto 0 auto;
+}
+
+.list-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item{
+    
+    min-width: 20vw;
+}
+
+div[update=""]{
+    background: greenyellow;
+}
+
+.item-form{
+    max-width: 35vw;
+}
+
+.hidden{
+    display: none;
+}

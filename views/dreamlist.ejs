@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>Dream List</title>
+        <link rel='stylesheet' href='/styles/main.css'>
+    </head>
+
+    <body>
+        <h2>List</h2>
+        <a href="logout">Logout</a>
+        <h3>Hello <%= username%>, Add items to your list</h3>
+        <hr>
+        <div class='list-container'>
+            <form method='POST' action='' class='item-form'>
+                <label for="item-name">Name of Item:</label>
+                <input type="text" name="item_name" placeholder='book/phone...' required>
+                <br>
+                <label for='item-description'>Why do you want this object?</label>
+                <textarea rows="20" cols="40" name='item_description' placeholder='Briefly explain to yourself how this object makes you feel'></textarea>
+                <br>
+                <label for='item-price'>Price of the Item:</label>
+                <input type='number' name='item_price' required/>
+                <button type="submit">Add Item</button>
+            </form>
+            <div class='list'  j-user=<%= username%>>
+                <% for(var i = 0; i<items.length; i++){%>
+                    <div class='item' j_id=<%= items[i]._id%> >
+                        <h2><%=items[i].item_name%></h2>
+                        <h4><%=items[i].item_description%></h4>
+                        <h3><%=items[i].item_price%></h4>    
+                    </div>
+                <%}%> 
+            </div>
+        </div>
+
+        
+        <script>
+            document.body.addEventListener('click', function(event){
+                if(event.target.parentElement.getAttribute('j_id')){
+                        event.target.parentElement.classList.add('hidden')
+                        generateUpdateForm(event.target.parentElement, event.target)
+                }
+
+                if(event.target.getAttribute('update')){
+                    event.target.removeAttribute('update')
+                    event.target.parentElement.parentElement.removeChild(event.target.parentElement)
+                    document.querySelector(`div[j_id="${event.target.getAttribute('relevant')}"]`).classList.remove('hidden')
+                }
+            }) 
+
+            function generateUpdateForm(parent,target){
+                 console.log(parent)
+                /*console.log(target) */
+                let formHTML = `<form method='POST' action='dreamlist/update' relevant=${parent.getAttribute('j_id')} update='true'>
+                    <input type='text' name='item_name' value=${parent.children[0].innerText} />
+                    <textarea  name='item_description' col='30' row='30' value=${parent.children[1].innerText} ></textarea>
+                    <input type='text' name='item_price' value=${parent.children[2].innerText} />
+                    <input name='item_id' value=${parent.getAttribute('j_id')} class='hidden'/>
+                    <button type='submit'>Update</button>
+                    
+                    <a href='dreamlist/delete?item_id=${parent.getAttribute('j_id')}&&username=${parent.parentElement.getAttribute('j-user')}'>Delete Item</a>
+                </form>
+                `
+                let updateElement = document.createElement('div')
+                updateElement.setAttribute('update', '')
+                updateElement.innerHTML = formHTML
+                parent.setAttribute('editing','')
+                parent.parentElement.insertBefore(updateElement, parent)
+            }
+            
+        </script>
+    </body>
+
+</html>

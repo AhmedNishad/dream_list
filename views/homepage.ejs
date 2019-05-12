@@ -1,0 +1,11 @@
+<html>
+    <head>
+        <title>Home</title>
+        <%- include('head')%>
+    </head>
+    <body>
+        <%- include('header')%>
+        <% if(logged){%><a href="/user/logout">Logout</a>  <% }else{%><%}%>
+        <h3>Welcome <%= username%></h3>
+    </body>
+</html>

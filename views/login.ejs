@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>Login Page</title>
+        <link type='text/css' rel='stylesheet' href='../styles/main.css' >
+    </head>
+
+    <body>
+        <%- include('header')%>
+        <h1>Login now</h1>
+        <% for(var i = 0; i < errors.length; i++){%><%= errors[i]%><% }%>
+        <form method="POST" action="">
+            <label for='username'>Username: </label>
+            <input type='text' name='username' required /> <br>
+        
+            <label for='password'>Password: </label>
+            <input type='password' required name='password' max-length='14'/> <br>
+            <button type='submit'>Login </button>
+        </form>
+    </body>
+</html>
